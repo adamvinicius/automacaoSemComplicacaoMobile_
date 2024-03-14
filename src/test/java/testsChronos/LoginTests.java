@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import pages.LoginPage;
+import pages.ProdutosPage;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -17,9 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LoginTests {
     LoginPage loginPage;
-
-    @AndroidFindBy(accessibility = "conhecaTodosOsNossoCursos")
-    public WebElement txtTituloProdutos;
+    ProdutosPage produtosPage;
 
     @Test
     public void imprimirNoConsole(){
@@ -29,18 +28,12 @@ public class LoginTests {
     @Test
     public void realizarLoginValido() throws MalformedURLException {
         Driver.inicializaDriver();
-        PageFactory.initElements(new AppiumFieldDecorator(Driver.getAppiumDriver()), this);
         loginPage = new LoginPage();
         loginPage.realizarLogin("teste@chronosacademy.com.br", "123456");
 
-        assertEquals("Conheça todos os nossos cursos", getTxtTituloProdutos());
+        produtosPage = new ProdutosPage();
+        assertEquals("Conheça todos os nossos cursos", produtosPage.getTxtTituloProdutos());
     }
-
-    public String getTxtTituloProdutos(){
-        return txtTituloProdutos.getText();
-    }
-
-
 }
 
 
