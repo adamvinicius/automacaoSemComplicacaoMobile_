@@ -3,18 +3,15 @@ package pages;
 import core.Driver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import maps.LoginMaps;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.print.PrintOptions;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage {
-    @AndroidFindBy(accessibility = "inputEmail")
-    public WebElement inpEmail;
+import java.io.File;
 
-    @AndroidFindBy(accessibility = "inputPassword")
-    public WebElement inpPassword;
-
-    @AndroidFindBy(accessibility = "Entrar")
-    public WebElement btnEntrar;
+public class LoginPage extends LoginMaps {
 
     public LoginPage(){
         PageFactory.initElements(new AppiumFieldDecorator(Driver.getAppiumDriver()), this);
@@ -25,4 +22,40 @@ public class LoginPage {
         inpPassword.sendKeys(senha);
         btnEntrar.click();
     }
+
+    public String getTxtEmailError(){
+        try {
+            return txtEmailError.getText();
+        }catch (Exception e){
+            return txtAuthErrorEmail.getText();
+        }
+
+    }
+
+    public String getTxtPasswordError(){
+        try {
+            return txtPasswordError.getText();
+        }catch (Exception e){
+            return txtAuthErrorPassword.getText();
+        }
+    }
+
+    public void clickLinkNaoTemConta(){
+        linkNaoTemConta.click();
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
